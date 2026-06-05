@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,31 +43,8 @@
             background: linear-gradient(180deg, rgba(22,27,34,0.5) 0%, rgba(13,17,23,0) 100%);
         }
 
-        .hero-flex {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-        }
-
-        /* FIXED CONTAINER BREAKING THE OVAL */
-        .profile-img-container {
-            flex-shrink: 0;
-            width: 180px;
-            height: 180px;
-        }
-
-        .profile-photo {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--border-color);
-            box-shadow: 0 0 20px var(--accent-glow);
-            display: block;
-        }
-
         .hero-text {
-            flex-grow: 1;
+            width: 100%;
         }
 
         .hero-text h1 {
@@ -99,7 +75,7 @@
 
         .hero-text p {
             color: var(--text-muted);
-            max-width: 700px;
+            max-width: 800px;
             font-size: 1.05rem;
             margin-bottom: 25px;
         }
@@ -338,15 +314,6 @@
             header {
                 padding: 40px 0 20px 0;
             }
-            .hero-flex {
-                flex-direction: column;
-                text-align: center;
-                gap: 20px;
-            }
-            .profile-img-container {
-                width: 140px;
-                height: 140px;
-            }
             .hero-text h1 {
                 font-size: 2rem;
             }
@@ -370,14 +337,8 @@
 </head>
 <body>
 
-    <!-- Header Section -->
     <header>
-        <div class="container hero-flex">
-            <!-- Profile Picture Box -->
-            <div class="profile-img-container">
-                <img src="WhatsApp Image 2024-10-31 at 09.04.46.jpeg" alt="Mohammad Husnain Shahid" class="profile-photo">
-            </div>
-            <!-- Identity Info Box -->
+        <div class="container">
             <div class="hero-text">
                 <h1>Mohammad Husnain Shahid</h1>
                 <h2>Network & Infrastructure Engineer</h2>
@@ -393,7 +354,6 @@
         </div>
     </header>
 
-    <!-- Credentials Section -->
     <section>
         <div class="container">
             <h3>Global Credentials</h3>
@@ -423,13 +383,11 @@
         </div>
     </section>
 
-    <!-- Projects Portfolio Section -->
     <section>
         <div class="container">
             <h3>Major Project Deployments</h3>
             <div class="project-grid">
 
-                <!-- Project 1: General Bus Stand Sargodha -->
                 <div class="project-card">
                     <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=600&q=80" alt="Fiber Optic Infrastructure Network" class="project-img">
                     <div class="project-info">
@@ -442,12 +400,11 @@
                     </div>
                 </div>
 
-                <!-- Project 2: Gerry's Visa Center Office -->
                 <div class="project-card">
                     <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=600&q=80" alt="Secure CCTV Network Control Room" class="project-img">
                     <div class="project-info">
                         <div class="project-location">Crystal Mall Multan</div>
-                        <h4>Gerry’s Visa Center Setup</h4>
+                        <h4>Crystal Mall Setup</h4>
                         <p>Designed and managed the physical security infrastructure deployment for an international diplomatic processing hub. Integrated secure localized access controls with tamper-proof surveillance links.</p>
                         <div class="tech-tags">
                             <span>High-Security Topology</span><span>Biometric Access</span><span>Isolated VLANs</span>
@@ -455,7 +412,6 @@
                     </div>
                 </div>
 
-                <!-- Project 3: DC Office Sargodha -->
                 <div class="project-card">
                     <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80" alt="Network Server Switches Rack" class="project-img">
                     <div class="project-info">
@@ -468,7 +424,6 @@
                     </div>
                 </div>
 
-                <!-- Project 4: Arena Hospital -->
                 <div class="project-card">
                     <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" alt="Biometrics and Identity Access Verification" class="project-img">
                     <div class="project-info">
@@ -481,7 +436,6 @@
                     </div>
                 </div>
 
-                <!-- Project 5: AgriMall South Punjab -->
                 <div class="project-card">
                     <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" alt="Multi site corporate tech hardware infrastructure" class="project-img">
                     <div class="project-info">
@@ -494,7 +448,6 @@
                     </div>
                 </div>
 
-                <!-- Project 6: Regional Election Commission Office -->
                 <div class="project-card">
                     <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" alt="Enterprise Server Cabinet Room" class="project-img">
                     <div class="project-info">
@@ -511,7 +464,6 @@
         </div>
     </section>
 
-    <!-- Technical Skill Categories Matrix -->
     <section>
         <div class="container">
             <h3>Technical Expertise Matrix</h3>
@@ -547,7 +499,6 @@
         </div>
     </section>
 
-    <!-- Footer Area -->
     <footer>
         <div class="container">
             <p class="footer-address">🏢 <strong>Tech Vision Head Office:</strong> Office Number G-11, City Plaza, Bahawalpur, Pakistan</p>
@@ -561,5 +512,3 @@
 
 </body>
 </html>
-
-```
