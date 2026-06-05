@@ -1,0 +1,571 @@
+Ah, I see what happened in your tut.PNG screenshot. The image container is completely squished into a flat oval because the browser doesn't know the image's dimensions yet, or the file name hasn't matched perfectly.
+To fix that layout bug permanently and ensure it stays perfectly circular on both desktop and mobile phones (even if the image is missing or loading slowly), we need to set explicit width and height constraints on the .profile-img-container and update the image reference.
+Here is the corrected code block. Replace the old header code with this one, or update your file to match it:
+### The Fix
+ 1. Make sure your actual image file **WhatsApp Image 2024-10-31 at 09.04.46.jpeg** is placed in the **exact same folder** as your index.html file.
+ 2. I have updated the src attribute in the code below to match that exact file name verbatim so you don't even have to rename it.
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammad Husnain Shahid | Network & Infrastructure Engineer</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --accent-glow: rgba(88, 166, 255, 0.15);
+            --border-color: #30363d;
+            --call-btn-bg: #238636;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Hero / Profile Section */
+        header {
+            padding: 80px 0 40px 0;
+            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(180deg, rgba(22,27,34,0.5) 0%, rgba(13,17,23,0) 100%);
+        }
+
+        .hero-flex {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        /* FIXED CONTAINER BREAKING THE OVAL */
+        .profile-img-container {
+            flex-shrink: 0;
+            width: 180px;
+            height: 180px;
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--border-color);
+            box-shadow: 0 0 20px var(--accent-glow);
+            display: block;
+        }
+
+        .hero-text {
+            flex-grow: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #ffffff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text h2 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .location-badge {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-text p {
+            color: var(--text-muted);
+            max-width: 700px;
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .btn-main {
+            background-color: var(--accent);
+            color: #0d1117;
+        }
+
+        .btn-call {
+            background-color: var(--call-btn-bg);
+            color: #ffffff;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        /* Grid Layouts */
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section h3 {
+            font-size: 1.6rem;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h3::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background-color: var(--accent);
+            bottom: -8px;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        /* Certifications Row */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .cert-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+
+        .cert-card:hover {
+            border-color: var(--accent);
+        }
+
+        .cert-card .badge-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .cert-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .cert-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .status-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            background-color: rgba(255, 165, 0, 0.15);
+            color: #ffa500;
+            border-radius: 12px;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        /* Projects Section */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .project-info {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-info h4 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .project-location {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .project-info p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-tags span {
+            background-color: rgba(88, 166, 255, 0.1);
+            color: var(--accent);
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(88, 166, 255, 0.2);
+        }
+
+        /* Technical Toolkit Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .skills-category {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .skills-category h4 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.15rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        .skills-category ul {
+            list-style: none;
+        }
+
+        .skills-category ul li {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+        }
+
+        .skills-category ul li::before {
+            content: "▹";
+            color: var(--accent);
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        /* Footer / Contact */
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            background-color: rgba(22, 27, 34, 0.3);
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .footer-address {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            margin-bottom: 25px;
+        }
+
+        /* Responsive Design Rules for Phones */
+        @media (max-width: 768px) {
+            header {
+                padding: 40px 0 20px 0;
+            }
+            .hero-flex {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            .profile-img-container {
+                width: 140px;
+                height: 140px;
+            }
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            .hero-text h2 {
+                font-size: 1.1rem;
+            }
+            .location-badge {
+                justify-content: center;
+            }
+            .btn-group {
+                justify-content: center;
+            }
+            section {
+                padding: 40px 0;
+            }
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container hero-flex">
+            <!-- Profile Picture Box -->
+            <div class="profile-img-container">
+                <img src="WhatsApp Image 2024-10-31 at 09.04.46.jpeg" alt="Mohammad Husnain Shahid" class="profile-photo">
+            </div>
+            <!-- Identity Info Box -->
+            <div class="hero-text">
+                <h1>Mohammad Husnain Shahid</h1>
+                <h2>Network & Infrastructure Engineer</h2>
+                <div class="location-badge">
+                    📍 Office G-11, City Plaza, Bahawalpur, Pakistan
+                </div>
+                <p>IT Specialist combining corporate academic training with extensive, hands-on field experience designing and delivering large-scale fiber-optic backbones, high-security CCTV matrices, and enterprise biometric access systems across public and commercial sectors.</p>
+                <div class="btn-group">
+                    <a href="mailto:techvisionbwp@gmail.com" class="btn btn-main">📧 Email Me</a>
+                    <a href="tel:03026410824" class="btn btn-call">📞 Call Now: 03026410824</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Credentials Section -->
+    <section>
+        <div class="container">
+            <h3>Global Credentials</h3>
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <div class="badge-icon">🌐</div>
+                    <h4>Cisco CCNA</h4>
+                    <p>Enterprise Routing, Switching, & Automation</p>
+                    <span class="status-tag">In Progress (Corvit)</span>
+                </div>
+                <div class="cert-card">
+                    <div class="badge-icon">🛡️</div>
+                    <h4>Hikvision HCSA</h4>
+                    <p>Certified Security Associate - Maintenance</p>
+                </div>
+                <div class="cert-card">
+                    <div class="badge-icon">📷</div>
+                    <h4>Hikvision CGSA</h4>
+                    <p>Certified General Security Associate - CCTV</p>
+                </div>
+                <div class="cert-card">
+                    <div class="badge-icon">🤖</div>
+                    <h4>Google IT Support</h4>
+                    <p>Professional IT Infrastructure Foundations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Portfolio Section -->
+    <section>
+        <div class="container">
+            <h3>Major Project Deployments</h3>
+            <div class="project-grid">
+
+                <!-- Project 1: General Bus Stand Sargodha -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=600&q=80" alt="Fiber Optic Infrastructure Network" class="project-img">
+                    <div class="project-info">
+                        <div class="project-location">Municipal Infrastructure</div>
+                        <h4>General Bus Stand Layout</h4>
+                        <p>Engineered and deployed a complete wide-area, open-space surveillance environment running entirely over a multi-node optical fiber backbone to eliminate data latency across extended geographic perimeters.</p>
+                        <div class="tech-tags">
+                            <span>Fiber Core Backbone</span><span>Outdoor PoE Matrix</span><span>High-Bitrate Aggregation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Gerry's Visa Center Office -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=600&q=80" alt="Secure CCTV Network Control Room" class="project-img">
+                    <div class="project-info">
+                        <div class="project-location">Crystal Mall Multan</div>
+                        <h4>Gerry’s Visa Center Setup</h4>
+                        <p>Designed and managed the physical security infrastructure deployment for an international diplomatic processing hub. Integrated secure localized access controls with tamper-proof surveillance links.</p>
+                        <div class="tech-tags">
+                            <span>High-Security Topology</span><span>Biometric Access</span><span>Isolated VLANs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: DC Office Sargodha -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80" alt="Network Server Switches Rack" class="project-img">
+                    <div class="project-info">
+                        <div class="project-location">Government Sector</div>
+                        <h4>DC Office Surveillance</h4>
+                        <p>Complete logical and physical overhaul of centralized CCTV network configurations, introducing high-capacity NVR matrix arrays and unified network system tracking.</p>
+                        <div class="tech-tags">
+                            <span>NVR Matrix Array</span><span>System Monitoring</span><span>Network Hardware Layout</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Arena Hospital -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" alt="Biometrics and Identity Access Verification" class="project-img">
+                    <div class="project-info">
+                        <div class="project-location">Bahawalpur</div>
+                        <h4>Arena Hospital Infrastructure</h4>
+                        <p>Deployed facility-wide synchronized network frameworks linking identity-verification biometric access control points with real-time video security feeds across medical wings.</p>
+                        <div class="tech-tags">
+                            <span>Biometric Hardware</span><span>IoT Security</span><span>IP Network Mapping</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5: AgriMall South Punjab -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" alt="Multi site corporate tech hardware infrastructure" class="project-img">
+                    <div class="project-info">
+                        <div class="project-location">Commercial Logistics</div>
+                        <h4>AgriMall Corporate Branches</h4>
+                        <p>Supervised and standardized multi-site IT deployment, including centralized network routing schemes, peripheral terminal links, and branch-level security controls.</p>
+                        <div class="tech-tags">
+                            <span>Multi-Site Deployments</span><span>Peripheral Terminal Links</span><span>Branch Gateways</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6: Regional Election Commission Office -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" alt="Enterprise Server Cabinet Room" class="project-img">
+                    <div class="project-info">
+                        <div class="project-location">Bahawalpur</div>
+                        <h4>Election Commission Setup</h4>
+                        <p>Implemented secure server rack cabinets, network physical safety locks, and high-performance IP surveillance nodes to ensure secure operational tracking during critical intervals.</p>
+                        <div class="tech-tags">
+                            <span>Rack Cabinets</span><span>Physical Security Locks</span><span>Secure IP Nodes</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Skill Categories Matrix -->
+    <section>
+        <div class="container">
+            <h3>Technical Expertise Matrix</h3>
+            <div class="skills-grid">
+                <div class="skills-category">
+                    <h4>Core Networking</h4>
+                    <ul>
+                        <li>IPv4 / IPv6 Subnetting & Schema</li>
+                        <li>OSPF & Static Routing Protocols</li>
+                        <li>VLAN Segmentation & Trunking</li>
+                        <li>Access Control Lists (ACLs) & NAT</li>
+                    </ul>
+                </div>
+                <div class="skills-category">
+                    <h4>Physical Infrastructure</h4>
+                    <ul>
+                        <li>Fiber Optic Layout Design</li>
+                        <li>Optical Link & PoE Budgets</li>
+                        <li>Structured Cat6/Fiber Cabling</li>
+                        <li>Rack Space Architecture</li>
+                    </ul>
+                </div>
+                <div class="skills-category">
+                    <h4>Hardware Specializations</h4>
+                    <ul>
+                        <li>Hikvision Enterprise NVR / DVR</li>
+                        <li>IP Security Systems (PTZ / ColorVu)</li>
+                        <li>Biometric Identity Access Terminals</li>
+                        <li>Cisco Switches & Gateways</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Area -->
+    <footer>
+        <div class="container">
+            <p class="footer-address">🏢 <strong>Tech Vision Head Office:</strong> Office Number G-11, City Plaza, Bahawalpur, Pakistan</p>
+            <p>Academic Focus: BS Information Technology — The Islamia University of Bahawalpur</p>
+            <div class="btn-group" style="justify-content: center; margin-top: 20px;">
+                <a href="tel:03026410824" class="btn btn-call">📞 Call Now: 03026410824</a>
+                <a href="mailto:techvisionbwp@gmail.com" class="btn btn-main">📧 techvisionbwp@gmail.com</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+
+```
